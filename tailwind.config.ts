@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -6,7 +7,7 @@ export default {
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./src/**/*.{ts,tsx}"
 	],
 	prefix: "",
 	theme: {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				cosmic: {
+					black: '#0A0E17',
+					deepBlue: '#0F1E4A',
+					blue: '#1C3FA0',
+					brightBlue: '#2463FF',
+					red: '#FF3D57',
+					brightRed: '#FF617A',
+					white: '#F0F2FF'
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,35 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'star-twinkle': {
+					'0%, 100%': { opacity: '0.9', transform: 'scale(0.9)' },
+					'50%': { opacity: '0.4', transform: 'scale(0.5)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
+				'spin-slow': 'spin-slow 90s linear infinite',
+				'star-twinkle': 'star-twinkle 3s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'space-gradient': 'radial-gradient(ellipse at bottom, #1C3FA0 0%, #0A0E17 70%)',
+				'space-stars': 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 800 800\'%3E%3Cg fill=\'none\' stroke=\'%23FFFFFF\' stroke-width=\'1\'%3E%3Ccircle r=\'1\' cx=\'100\' cy=\'100\'/%3E%3Ccircle r=\'1\' cx=\'300\' cy=\'200\'/%3E%3Ccircle r=\'0.5\' cx=\'500\' cy=\'100\'/%3E%3Ccircle r=\'1\' cx=\'700\' cy=\'300\'/%3E%3Ccircle r=\'0.5\' cx=\'150\' cy=\'350\'/%3E%3Ccircle r=\'1\' cx=\'450\' cy=\'450\'/%3E%3Ccircle r=\'0.5\' cx=\'650\' cy=\'550\'/%3E%3Ccircle r=\'1\' cx=\'750\' cy=\'650\'/%3E%3Ccircle r=\'1\' cx=\'150\' cy=\'750\'/%3E%3Ccircle r=\'0.5\' cx=\'300\' cy=\'650\'/%3E%3C/g%3E%3C/svg%3E")',
 			}
 		}
 	},

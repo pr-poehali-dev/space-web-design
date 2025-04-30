@@ -83,29 +83,31 @@ const Index = () => {
                   Смотреть портфолио
                 </Button>
               </div>
-              
-              {/* Stats in single row with shadow and hover animations */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-6 w-full">
-                {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index}
-                    whileHover={{ y: -5, scale: 1.03 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-cosmic-darkBlue/50 backdrop-blur-sm p-4 rounded-lg border border-cosmic-blue/20 
-                      shadow-[0_0_15px_rgba(41,121,255,0.2)] hover:shadow-[0_0_20px_rgba(41,121,255,0.4)] 
-                      transition-all duration-300 flex flex-col items-center justify-center"
-                  >
-                    <span className="text-2xl md:text-3xl font-bold text-cosmic-white bg-gradient-to-r from-cosmic-brightBlue to-cosmic-red bg-clip-text text-transparent">
-                      {stat.value}
-                    </span>
-                    <span className="text-cosmic-gray text-center whitespace-nowrap">{stat.label}</span>
-                  </motion.div>
-                ))}
-              </div>
             </div>
             
             <div className="relative">
               <Planet className="w-full h-full max-w-md mx-auto" />
+            </div>
+          </div>
+          
+          {/* Stats with large cards spanning full width */}
+          <div className="w-full mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-10 w-full">
+              {stats.map((stat, index) => (
+                <motion.div 
+                  key={index}
+                  whileHover={{ y: -8, scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-cosmic-darkBlue/50 backdrop-blur-sm py-8 px-6 rounded-2xl border border-cosmic-blue/20 
+                    shadow-[0_0_25px_rgba(41,121,255,0.2)] hover:shadow-[0_0_35px_rgba(41,121,255,0.4)] 
+                    transition-all duration-300 flex flex-col items-center justify-center h-full"
+                >
+                  <span className="text-3xl md:text-5xl font-bold text-cosmic-white bg-gradient-to-r from-cosmic-brightBlue to-cosmic-red bg-clip-text text-transparent mb-3">
+                    {stat.value}
+                  </span>
+                  <span className="text-cosmic-gray text-center text-lg md:text-xl">{stat.label}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>

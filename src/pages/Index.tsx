@@ -61,10 +61,9 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row items-center">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+              <div 
+                className="opacity-0 animate-in" 
+                style={{transform: 'translateY(0)', animation: 'fadeInUp 0.5s forwards'}}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                   Космические <span className="bg-gradient-to-r from-cosmic-brightBlue to-cosmic-red bg-clip-text text-transparent">технологии</span> для земного бизнеса
@@ -80,15 +79,13 @@ const Index = () => {
                     Наши работы
                   </Button>
                 </div>
-              </motion.div>
+              </div>
             </div>
             
             <div className="lg:w-1/2 relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="relative"
+              <div
+                className="opacity-0 transition-opacity duration-700 delay-200"
+                style={{animation: 'fadeIn 0.7s 0.2s forwards'}}
               >
                 <div className="relative flex justify-center items-center">
                   <div className="absolute w-full h-full bg-gradient-to-r from-cosmic-purple/20 to-cosmic-brightBlue/20 blur-3xl rounded-full opacity-50"></div>
@@ -109,7 +106,7 @@ const Index = () => {
                     className="rounded-lg shadow-[0_0_50px_rgba(41,121,255,0.3)] max-w-full h-auto"
                   />
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -120,18 +117,18 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center p-6 bg-cosmic-darkBlue/50 backdrop-blur-sm rounded-lg border border-cosmic-blue/30"
+                className="text-center p-6 bg-cosmic-darkBlue/50 backdrop-blur-sm rounded-lg border border-cosmic-blue/30 transform transition-all opacity-0"
+                style={{
+                  animation: `fadeInUp 0.5s ${index * 0.1}s forwards`
+                }}
               >
                 <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cosmic-brightBlue to-cosmic-red bg-clip-text text-transparent mb-2">
                   {stat.value}
                 </div>
                 <div className="text-cosmic-gray">{stat.label}</div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -232,11 +229,9 @@ const Index = () => {
             </div>
             
             <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7 }}
-                className="relative"
+              <div 
+                className="opacity-0 transition-opacity duration-700"
+                style={{animation: 'fadeIn 0.7s forwards'}}
               >
                 <div className="absolute w-full h-full bg-gradient-to-r from-cosmic-purple/20 to-cosmic-brightBlue/20 blur-3xl rounded-full opacity-50"></div>
                 <img 
@@ -244,7 +239,7 @@ const Index = () => {
                   alt="Наши преимущества" 
                   className="rounded-lg shadow-[0_0_50px_rgba(228,30,69,0.3)] max-w-full h-auto relative z-10"
                 />
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

@@ -105,7 +105,12 @@
   }
 
   body {
-    @apply bg-cosmic-black text-cosmic-white;
+    @apply bg-cosmic-black text-cosmic-white min-h-screen;
+    overflow-x: hidden;
+  }
+
+  html {
+    @apply overflow-x-hidden;
   }
 }
 
@@ -115,5 +120,21 @@
   }
   to {
     transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }

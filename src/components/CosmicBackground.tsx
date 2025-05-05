@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const CosmicBackground: React.FC = () => {
@@ -10,14 +11,30 @@ const CosmicBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas dimensions
+    // Set canvas dimensions and handle resize
     const setCanvasDimensions = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 1.2; // Increase the height for better coverage
+      canvas.height = Math.max(window.innerHeight * 1.2, document.body.scrollHeight);
+      draw(); // Redraw when resize
     };
 
+    // Initial setup
     setCanvasDimensions();
+    
+    // Add resize listener
     window.addEventListener('resize', setCanvasDimensions);
+    
+    // Check document height periodically and adjust canvas if needed
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.target === document.body) {
+          canvas.height = Math.max(window.innerHeight * 1.2, document.body.scrollHeight);
+          draw();
+        }
+      }
+    });
+    
+    resizeObserver.observe(document.body);
 
     // Create stars
     class Star {
@@ -181,7 +198,7 @@ const CosmicBackground: React.FC = () => {
       
       constructor() {
         this.x = canvas.width * (0.3 + Math.random() * 0.4); // Position in center-ish area
-        this.y = canvas.height * (0.3 + Math.random() * 0.4);
+        this.y = canvas.height * 0.3; // Keep galaxy in top section
         this.size = Math.min(canvas.width, canvas.height) * 0.25;
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = 0.0001;
@@ -250,11 +267,17 @@ const CosmicBackground: React.FC = () => {
     const shootingStars: ShootingStar[] = [];
     const galaxies: Galaxy[] = [];
     
-    for (let i = 0; i < 300; i++) {
+    // Create starry background with density based on screen size
+    const starDensity = Math.min(0.0003, 0.0001 + (canvas.width * canvas.height) / (1920 * 1080) * 0.0002);
+    const starCount = Math.floor(canvas.width * canvas.height * starDensity);
+    
+    for (let i = 0; i < starCount; i++) {
       stars.push(new Star());
     }
     
-    for (let i = 0; i < 8; i++) {
+    // Scale nebula count based on screen size
+    const nebulaCount = Math.max(3, Math.min(8, Math.floor(canvas.width * canvas.height / (1920 * 1080) * 8)));
+    for (let i = 0; i < nebulaCount; i++) {
       nebulas.push(new Nebula());
     }
     
@@ -264,8 +287,7 @@ const CosmicBackground: React.FC = () => {
     
     galaxies.push(new Galaxy());
 
-    // Animation loop
-    const animate = () => {
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Create deep space background
@@ -297,14 +319,21 @@ const CosmicBackground: React.FC = () => {
         shootingStar.update();
         shootingStar.draw();
       });
-      
-      requestAnimationFrame(animate);
+    }
+
+    // Animation loop
+    let animationId: number;
+    const animate = () => {
+      draw();
+      animationId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
       window.removeEventListener('resize', setCanvasDimensions);
+      resizeObserver.disconnect();
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
@@ -312,6 +341,7 @@ const CosmicBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full -z-10"
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -10 }}
     />
   );
 };

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import MainNav from '@/components/MainNav';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,6 +6,7 @@ import { RocketIcon, Code, BarChart3, Search, Globe, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from '@/components/ui/motion';
 import CosmicBackground from '@/components/CosmicBackground';
+import Footer from '@/components/Footer';
 
 const Services = () => {
   const services = [
@@ -114,6 +116,8 @@ const Services = () => {
           </Button>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };

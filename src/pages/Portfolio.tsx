@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import CosmicBackground from '@/components/CosmicBackground';
+import Footer from '@/components/Footer';
 
 const Portfolio = () => {
   const projects = [
@@ -19,7 +20,7 @@ const Portfolio = () => {
       image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000',
       tags: ['Corporate', 'WordPress', 'SEO'],
       conversion: '45%',
-      description: 'Редизайн и оптимизация корпоративного сайта. Внедрение системы онлайн-расчёта стоимости доставки увеличило количество заявок на 45%.',
+      description: 'Редизайн и оптимизация корпоративного сайта. Внедрение системы онлайн-расчёта стоимйости доставки увеличило количество заявок на 45%.',
     },
     {
       title: 'Лендинг для IT-школы',
@@ -33,7 +34,7 @@ const Portfolio = () => {
       image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1000',
       tags: ['Booking System', 'React', 'API'],
       conversion: '32%',
-      description: 'Создание сервиса онлайн-бронирования с интерактивным календарем и системой отзывов. Повышение удобства использования увеличило конверсию на 32%.',
+      description: 'Создание серсиса онлайн-бронирования с интерактивным календарем и системой отзывов. Повышение удобства использования увеличило конверсию на 32%.',
     },
     {
       title: 'Медицинский портал',
@@ -112,6 +113,8 @@ const Portfolio = () => {
           </Button>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };

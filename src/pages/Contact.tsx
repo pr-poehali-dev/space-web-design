@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { PhoneIcon, MapPinIcon, MailIcon, MessageSquare } from 'lucide-react';
 import CosmicBackground from '@/components/CosmicBackground';
+import Footer from '@/components/Footer';
 
 const Contact = () => {
   return (
@@ -164,6 +165,8 @@ const Contact = () => {
           </Card>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };

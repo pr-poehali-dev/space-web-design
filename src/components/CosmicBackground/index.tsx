@@ -1,11 +1,11 @@
 
 import React, { useEffect, useRef } from 'react';
-import { createCosmicObjects, updateAndDrawObjects, CosmicObjects } from './utils';
+import { createCosmicObjects, updateAndDrawObjects } from './utils';
 
 const CosmicBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationIdRef = useRef<number | null>(null);
-  const cosmicObjectsRef = useRef<CosmicObjects | null>(null);
+  const cosmicObjectsRef = useRef<ReturnType<typeof createCosmicObjects> | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,13 +22,28 @@ const CosmicBackground: React.FC = () => {
       canvas.width = width;
       canvas.height = height;
       
-      // If we resize, recreate all objects to fit new dimensions
-      cosmicObjectsRef.current = createCosmicObjects(width, height);
+      // Create cosmic objects if they don't exist or if resizing
+      if (!cosmicObjectsRef.current) {
+        cosmicObjectsRef.current = createCosmicObjects(width, height);
+      } else {
+        // Just recreate all objects to fit new dimensions properly
+        cosmicObjectsRef.current = createCosmicObjects(width, height);
+      }
       
       // Redraw immediately after resize
       if (cosmicObjectsRef.current) {
-        updateAndDrawObjects(ctx, cosmicObjectsRef.current, width, height);
+        drawScene(ctx, cosmicObjectsRef.current, width, height);
       }
+    };
+
+    // Drawing function
+    const drawScene = (
+      ctx: CanvasRenderingContext2D,
+      cosmicObjects: ReturnType<typeof createCosmicObjects>,
+      canvasWidth: number, 
+      canvasHeight: number
+    ) => {
+      updateAndDrawObjects(ctx, cosmicObjects, canvasWidth, canvasHeight);
     };
 
     // Initial setup
@@ -46,7 +61,7 @@ const CosmicBackground: React.FC = () => {
             canvas.height = newHeight;
             // No need to recreate objects, just adjust canvas height
             if (cosmicObjectsRef.current) {
-              updateAndDrawObjects(ctx, cosmicObjectsRef.current, canvas.width, newHeight);
+              drawScene(ctx, cosmicObjectsRef.current, canvas.width, newHeight);
             }
           }
         }
@@ -58,7 +73,7 @@ const CosmicBackground: React.FC = () => {
     // Animation loop
     const animate = () => {
       if (ctx && cosmicObjectsRef.current) {
-        updateAndDrawObjects(ctx, cosmicObjectsRef.current, canvas.width, canvas.height);
+        drawScene(ctx, cosmicObjectsRef.current, canvas.width, canvas.height);
       }
       animationIdRef.current = requestAnimationFrame(animate);
     };

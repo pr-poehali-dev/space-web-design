@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const CosmicBackground: React.FC = () => {
@@ -341,7 +342,6 @@ const CosmicBackground: React.FC = () => {
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full -z-10"
       style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -10 }}
-      aria-hidden="true"
     />
   );
 };
